@@ -33,6 +33,9 @@ class RockcraftServiceFactory(ServiceFactory):
 
     # pylint: disable=invalid-name
 
+    LifecycleClass: type[
+        services.RockcraftLifecycleService
+    ] = services.RockcraftLifecycleService
     ImageClass: type[services.RockcraftImageService] = services.RockcraftImageService
     PackageClass: type[base_services.PackageService] = services.RockcraftPackageService
     ProviderClass: type[
