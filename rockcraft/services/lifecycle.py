@@ -37,11 +37,12 @@ class RockcraftLifecycleService(LifecycleService):
 
     @override
     def setup(self) -> None:
-        """Configure extra args to the LifecycleManager."""
+        """Initialize the LifecycleManager with previously-set arguments."""
         # pylint: disable=import-outside-toplevel
         # This inner import is necessary to resolve a cyclic import
         from rockcraft.services import RockcraftServiceFactory
 
+        # Configure extra args to the LifecycleManager
         project = cast(Project, self._project)
         project_vars = {"version": project.version}
 
@@ -62,7 +63,8 @@ class RockcraftLifecycleService(LifecycleService):
 
     @override
     def run(self, step_name: str, part_names: list[str] | None = None) -> None:
-        """Overridden to configure package repositories."""
+        """Run the lifecycle manager for the parts."""
+        # Overridden to configure package repositories.
         project = cast(Project, self._project)
         package_repositories = project.package_repositories
 
