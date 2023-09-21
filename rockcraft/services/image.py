@@ -28,7 +28,7 @@ from craft_cli import emit
 from rockcraft import models, oci
 
 
-@dataclass
+@dataclass(frozen=True)
 class ImageInfo:
     """Metadata about a fetched OCI Image."""
 
