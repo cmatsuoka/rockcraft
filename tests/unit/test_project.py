@@ -631,6 +631,23 @@ def test_project_yaml(yaml_loaded_data):
                 ),
             ],
         ),
+        (
+            {
+                "amd64v2": {
+                    "build-on": ["amd64"],
+                    "build-for": "amd64",
+                },
+            },
+            [
+                RockcraftBuildInfo(
+                    build_on="amd64",
+                    build_for="amd64",
+                    base=BaseName(name="ubuntu", version="20.04"),
+                    platform_entry="amd64v2",
+                    build_for_variant=None,
+                )
+            ],
+        ),
     ],
 )
 def test_project_get_build_plan(yaml_loaded_data, platforms, expected_build_infos):
