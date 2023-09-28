@@ -40,9 +40,11 @@ class RockcraftPackageService(PackageService):
         project: models.Project,
         services: RockcraftServiceFactory,
         *,
+        platform: str | None,
         build_for: str,
     ) -> None:
         super().__init__(app, project, services)
+        self._platform = platform
         self._build_for = build_for
 
     @override
@@ -63,22 +65,12 @@ class RockcraftPackageService(PackageService):
         image_service = services.image
         image_info = image_service.obtain_image()
 
-        build_on = util.get_host_architecture()
-        build_plan = self._project.get_build_plan()
-        build_plan = [plan for plan in build_plan if plan.build_for == self._build_for]
-        build_plan = [plan for plan in build_plan if plan.build_on == build_on]
-
-        if len(build_plan) != 1:
-            raise RuntimeError(f"Don't know which build to pack: {build_plan}")
-
-        build_info = cast(RockcraftBuildInfo, build_plan[0])
-
         archive_name = _pack(
             prime_dir=prime_dir,
             project=cast(Project, self._project),
             project_base_image=image_info.base_image,
             base_digest=image_info.base_digest,
-            rock_suffix=build_info.platform_entry,
+            rock_suffix=self._platform,
             build_for=self._build_for,
             base_layer_dir=image_info.base_layer_dir,
         )

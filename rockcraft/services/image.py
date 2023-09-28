@@ -47,6 +47,7 @@ class RockcraftImageService(BaseService):
         services: ServiceFactory,
         *,
         work_dir: Path,
+        platform: str | None,
         build_for: str,
     ):
         super().__init__(app, project, services)

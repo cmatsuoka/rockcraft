@@ -4,7 +4,7 @@ beautifulsoup4==4.11.1
 certifi==2022.12.7
 charset-normalizer==2.1.1
 colorama==0.4.6
-git+https://github.com/canonical/craft-application.git@main#egg=craft_application
+git+https://github.com/canonical/craft-application.git@14aa2f274652a243fd9f03e42c1b34fa02a9593f
 craft-archives==1.1.3
 craft-cli==2.1.0
 craft-parts==1.24.1
